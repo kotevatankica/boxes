@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+   
+  </head>
+  <body>
+
+    
+   <div class="inner-wrapper">
+    <div class="controlers">
+      <div class="controler">
+        <label>direction:</title>
+      <select name="direction">
+          <option value="fifo">First in First Out</option>
+          <option value="filo">First in Last Out</option>
+      </select>
+      </div>
+      <div class="controler">
+        <label>title form:</title>
+      <select name="tile-form">
+        <option value="circle">Circle</option>
+        <option value="square" selected>Square</option>
+        <option value="rounded" >Slighty åßœ∑å rounded</option>
+      </select>
+      </div>
+      <div class="controler">
+        <label>delay:</title>
+        <input name="delay" type="number" value="500">
+      </div>
+      <div class="controler">
+        <label>rows:</title>
+        <input id="rows" name="rows" type="number" value="3" max="20">
+      </div>
+      <div class="controler">
+        <label>columns:</title>
+        <input id="columns" name="columns" type="number" value="3" max="6">
+      </div>
+      <div class="controler">
+        <button name="draw">Draw!</button>
+      </div>
+   </div>
+   <div id="wrapper"></div>
+   </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
+
+
+<!-- rem za font em za margin  -->
