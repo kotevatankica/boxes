@@ -8,6 +8,9 @@
    
   </head>
   <body>
+    <div id="notification">
+
+    </div>
    <div class="inner-wrapper">
     <div class="controlers">
       <div class="controler">
@@ -27,15 +30,17 @@
       </div>
       <div class="controler">
         <label>delay:</title>
-        <input name="delay" type="number" value="500">
+        <input name="delay" type="number" value="500" placeholder="Input the delay of disappearance" required>
       </div>
       <div class="controler">
         <label>rows:</title>
-        <input id="rows" name="rows" type="number" value="3" max="20">
+        <input id="rows" name="rows" type="number" value="3" max="20" placeholder="number of rows" required>
+        <span>Drop me something between 1 and 20</span>
       </div>
       <div class="controler">
         <label>columns:</title>
-        <input id="columns" name="columns" type="number" value="3" max="6">
+        <input id="columns" name="columns" type="number" value="3" max="6" placeholder="number of columns" required>
+        <span>Feed me something between 1 and 6</span>
       </div>
       <div class="controler">
         <button name="draw" id="draw">Draw!</button>

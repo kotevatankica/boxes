@@ -14,7 +14,9 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+* {
+  box-sizing: border-box;
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -86,6 +88,7 @@ button:focus-visible {
   width: 100%;
   flex: 1;
   font-size: 1.5rem;
+
 }
 .controler input {
   padding: 0;
@@ -97,7 +100,44 @@ button:focus-visible {
   background-color: #6e6e6e;
 }
 
-@media screen and (max-width: 768px) {
+input + span {
+  display: none;
+}
+input:invalid + span {
+  display: block;
+  font-size: 1rem;
+  background-color: red;
+  color: white;
+  padding: 10px;
+}
+
+::placeholder {
+  color: white;
+  font-size: 1rem;
+  padding-left: 5px;
+}
+
+
+#notification {
+  position: fixed;
+  display: block;
+  height: 50px;
+  width: 100%;
+  top: 0px;
+  background-color: green;
+  transform: translate(0,-100%);
+  transition: all .30s;
+}
+
+#notification.show{
+  transform: translate(0,0);
+  display: flex;
+  flex-direction: column;
+}
+#notification .msg{
+  margin-top: 10px;
+  text-align: center;
+  color: white;
 }
 
 @media screen and (max-width: 426px) {
@@ -107,6 +147,12 @@ button:focus-visible {
   }
 }
 
+
+
+
+
+
+ /* new game  */
 .new-game {
   margin-block: 50px;
   background-color: #efefef;
