@@ -8,8 +8,6 @@
    
   </head>
   <body>
-
-    
    <div class="inner-wrapper">
     <div class="controlers">
       <div class="controler">
@@ -24,7 +22,7 @@
       <select name="tile-form">
         <option value="circle">Circle</option>
         <option value="square" selected>Square</option>
-        <option value="rounded" >Slighty åßœ∑å rounded</option>
+        <option value="rounded" >Slighty rounded</option>
       </select>
       </div>
       <div class="controler">
@@ -40,11 +38,48 @@
         <input id="columns" name="columns" type="number" value="3" max="6">
       </div>
       <div class="controler">
-        <button name="draw">Draw!</button>
+        <button name="draw" id="draw">Draw!</button>
       </div>
+      <div class="controler">
+        <button name="unload" id="unload">Unload</button>
+      </div>
+    
    </div>
    <div id="wrapper"></div>
    </div>
+   <div class="new-game">
+    <div class="controlers">
+      <div class="controler">
+        <button name="restart">Restart </button>
+      </div>
+      <div class="controler">
+        <label for="difficulty">difficulty:</label>
+        <select name="difficulty" id="">
+          <option value="easy"> Easy (4x4)</option>
+          <option value="hard"> Hard (5x5)</option>
+          <option value="nightmare"> Nightmare (6x6)</option>
+        </select>
+        <div class="controler">
+          <label for="tile-form">tile form:</label>
+          <select name="tile-form" id="">
+          <option value="circle">Circle</option>
+          <option value="square" selected>Square</option>
+          <option value="rounded" >Slighty rounded</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="flipper-game">
+      <h3>Flipper Game</h3>
+      <p>Turn all tiles to white!</p>
+
+      <div class="flipper-grid">
+          <!-- grid -->
+      </div>
+
+      <button>Set name</button>
+
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
