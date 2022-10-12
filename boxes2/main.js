@@ -123,6 +123,12 @@ const unload = (selectedTiles, direction, delay) => {
         return;
       }
 
+      showNotify(
+        `We still have ${selectedTiles.length} items left...`,
+        "success",
+        2000
+      );
+
       if (selectedTiles.length === 0) {
         clearInterval(interval);
         disableClick = false;
@@ -143,6 +149,11 @@ const unload = (selectedTiles, direction, delay) => {
         disableClick = false;
         return;
       }
+      showNotify(
+        `We still have ${selectedTiles.length} items left...`,
+        "success",
+        2000
+      );
 
       if (selectedTiles.length === 0) {
         clearInterval(interval);
@@ -161,10 +172,11 @@ const unloadWrap = () => {
 
 document.getElementById("unload").addEventListener("click", (event) => {
   if (interval && selectedTiles.length > 0) {
+    console.log("proba");
+    showNotify(`Stil bussy unloading ... `, "failed", 2000);
     if (selectedTiles.length === 0) {
       clearInterval(interval);
     }
-
     if (!disableClick) {
       clearInterval(interval);
       unloadWrap();
@@ -180,7 +192,11 @@ let draw = document.getElementById("draw");
 draw.addEventListener("click", (event) => {
   happensOnDimesionChange();
   console.log(rows);
-  showNotify(`Just drew a ${rows.value} x ${columns.value} grid of tiles`,3000);
+  showNotify(
+    `Just drew a ${rows.value} x ${columns.value} grid of tiles`,
+    "success",
+    2000
+  );
 });
 
 const changeTileForm = (form_type = "circle") => {
@@ -210,8 +226,8 @@ changeTileForm($form_selector.value);
 
 let notify = document.getElementById("notification");
 
-const showNotify = (text, delay=3000) => {
-  notify.innerHTML = `<div class= "msg">${text}</div>`;
+const showNotify = (text, type = "success", delay = 2000) => {
+  notify.innerHTML = `<div class= "msg ${type}">${text}</div>`;
   notify.classList.add("show");
   setTimeout(() => {
     hideNotify("");
@@ -221,5 +237,4 @@ const hideNotify = (text) => {
   console.log(notify);
   notify.innerHTML = `<div class= "msg">${text}</div>`;
   notify.classList.remove("show");
-
 };
