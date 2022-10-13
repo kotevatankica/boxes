@@ -1,44 +1,49 @@
 import "./style.css";
 let $flipperGrid = document.getElementById("flipper");
-let size;
 let $form_selector = document.querySelector('[name="form"]');
-let $tiles = document.querySelectorAll(".tile");
+let size;
 
-
-
-const makeGrid = (size,form = "") => {
-    let local_tile_form = "";
-
-    switch (form) {
+const makeGrid = (size) =>
+{
+    let form_type = document.querySelector('[name="form"]').value;
+    let local_tile_form = '' ;
+    switch(form_type)
+    {
       case "circle":
-        local_tile_form = form;
-        break;
+        local_tile_form=form_type;
+      break;
+      case "square":
+        local_tile_form=form_type;
+      break;
       case "rounded":
-        local_tile_form = form;
-        break;
+        local_tile_form=form_type;
+      break;
       default:
-        local_tile_form = "";
-        break;
+        local_tile_form= "";
+      break;
     }
-  let one_tile = `<div class="tile ${local_tile_form}"></div>`;
-  let rendered_tile = ``;
-  for (let index = 0; index < size; index++) {
-    rendered_tile += one_tile;
-  }
-  let one_row_string = `<div class="row">${rendered_tile}</div>`;
-  let final_string = ``;
-  for (let index = 0; index < size; index++) {
-    final_string += one_row_string;
-  }
-  console.log(final_string);
-  $flipperGrid.innerHTML = final_string;
-};
-makeGrid(size);
+    let one_tile = `<div class="tile2 ${local_tile_form}"></div>`;
+    let rendered_tile = ``;
+    for (let index = 0; index < size; index++)
+    {
+      rendered_tile += one_tile;
+    }
+    let one_row_string = `<div class="row">${rendered_tile}</div>`;
+    let final_string = ``;
+    for (let index = 0; index < size; index++)
+    {
+      final_string += one_row_string;
+    }
+    $flipperGrid.innerHTML = final_string;
+  };
+  makeGrid(size, document.querySelector('[name="form"]').value);
+  
+const changeDifficulty = () =>
+{
+let difficulty = document.querySelector('[name="difficulty"]');
 
-const changeDifficulty = () => {
-  let difficulty = document.querySelector('[name="difficulty"]');
-
-  switch (difficulty.value) {
+  switch (difficulty.value)
+  {
     case "easy":
       size = 4;
       break;
@@ -52,40 +57,68 @@ const changeDifficulty = () => {
       size = 4;
       break;
   }
-  makeGrid(size);
+  makeGrid(size)
+  
 };
-document
-  .querySelector('[name="difficulty"]')
-  .addEventListener("change", changeDifficulty);
-changeDifficulty();
+document.querySelector('[name="difficulty"]').addEventListener('change', changeDifficulty)
+changeDifficulty()
 
+const changeTileForm = () => {
 
-const changeTileForm = (form = "circle") => {
-    // console.log(`%c u boja`, "background:black;color:red");
-    if (form === "circle") {
-      Array.from($tiles).forEach((tile) => {
-        tile.classList.add("circle");
-        tile.classList.remove("rounded");
-      });
-    } else if (form === "square") {
-      Array.from($tiles).forEach((tile) => {
-        tile.classList.remove("circle");
-        tile.classList.remove("rounded");
-      });
-    } else if (form === "rounded") {
-      Array.from($tiles).forEach((tile) => {
-        tile.classList.add("rounded");
-        tile.classList.remove("circle");
-      });
-    } else {
-      Array.from($tiles).forEach((tile) => {
-        tile.classList.remove("rounded");
-      });
-    }
-  };
+  let form_type = document.querySelector('[name="form"]').value;
+  if (form_type === "circle") {
+    Array.from(document.querySelectorAll(".tile2")).forEach((e) => {
+      e.classList.add("circle");
+      e.classList.remove("rounded");
+    });
+  } else if (form_type === "square") {
+    Array.from(document.querySelectorAll(".tile2")).forEach((e) => {
+      e.classList.remove("circle");
+      e.classList.remove("rounded");
+    });
+  } else if (form_type === "rounded") {
+    Array.from(document.querySelectorAll(".tile2")).forEach((e) => {
+      e.classList.add("rounded");
+      e.classList.remove("circle");
+    });
+  } else {
+    Array.from(document.querySelectorAll(".tile2")).forEach((e) => {
+      e.classList.remove("rounded");
+    });
+  }
+  
+};
   changeTileForm($form_selector.value);
-
   $form_selector.addEventListener("change", (event) => {
-    let form = event.target.value;
-    changeTileForm(form);
+    let form_type = event.target.value;
+    changeTileForm(form_type.value);
   });
+
+const selectedTiles = [];
+$flipperGrid.addEventListener("click", (event) => {
+
+  if (event.target.classList.contains("tile2"))
+  {
+    selectedTiles.push(event.target);
+    if(event.target.classList.contains("selected"))
+    {
+      event.target.classList.remove("selected");
+    }
+    else
+    {
+      event.target.classList.add("selected");
+    }
+  }
+  else console.log("it's not a tile");
+});
+
+// x-closey-tile
+
+// data-
+// var sdasdselectedTiles = [
+//   [0,1,0,1,0],
+//   [0,1,0,1,0],
+//   [0,1,0,1,0],
+//   [0,1,0,1,0],
+//   [0,1,0,1,0],
+// ];

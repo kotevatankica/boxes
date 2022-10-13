@@ -200,7 +200,6 @@ draw.addEventListener("click", (event) => {
 });
 
 const changeTileForm = (form_type = "circle") => {
-  // console.log(`%c u boja`, "background:black;color:red");
   if (form_type === "circle") {
     Array.from($tiles).forEach((tile) => {
       tile.classList.add("circle");
