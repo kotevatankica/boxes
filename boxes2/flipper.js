@@ -2,7 +2,8 @@ import "./style.css";
 let $flipperGrid = document.getElementById("flipper");
 let $form_selector = document.querySelector('[name="form"]');
 let size;
-var positiontile = "";
+var position = "";
+const selectedTiles = [];
 
 const changeTileForm = () => {
   let form_type = document.querySelector('[name="form"]').value;
@@ -63,13 +64,63 @@ const makeGrid = (size) => {
 };
 makeGrid(size, document.querySelector('[name="form"]').value);
 
-// const find = (tile2, position) => {
-//   if (position[0] === tile2[0] && position[1] === tile2[1])
-//   return position;
+const randomTiles = () => {
+  let randomNum = Math.floor(Math.random() * size + 8);
+  console.log(randomNum);
 
-//   console.log(position);
-// };
+  for (let i = 0; i < randomNum; i++) {
+    let randomCol = Math.floor(Math.random() * size);
+    let randomRow = Math.floor(Math.random() * size);
+    let el = document.querySelector(
+      '[data-position="' + randomRow + "," + randomCol + '"]'
+    );
 
+    flip(el);
+  }
+};
+
+document
+  .querySelector('[name="restart"]')
+  .addEventListener("click", (event) => {
+    randomTiles(event);
+  });
+
+const findNeighbours = (position) => {
+  position = position.split(",");
+  let all_candidates = [];
+  let up_down = parseInt(position[0]);
+  let left_right = parseInt(position[1]);
+  var prethodernRed = up_down - 1;
+  var sledenRed = up_down + 1;
+
+  console.log(size);
+  if (prethodernRed >= 0 && prethodernRed <= size - 1) {
+    all_candidates.push([prethodernRed, left_right]);
+  }
+  if (sledenRed >= 0 && sledenRed <= size - 1) {
+    console.log(prethodernRed);
+    all_candidates.push([sledenRed, left_right]);
+  }
+  var prethodnaCol = left_right - 1;
+  var slednaCol = left_right + 1;
+
+  if (prethodnaCol >= 0 && prethodnaCol <= size - 1) {
+    all_candidates.push([up_down, prethodnaCol]);
+  }
+  if (slednaCol >= 0 && slednaCol <= size - 1) {
+    all_candidates.push([up_down, slednaCol]);
+  }
+
+  for (let i = 0; i <= all_candidates.length; i++) {
+    let arr = all_candidates[i];
+    var dataPos = arr.join(",");
+    let el = document.querySelector('[data-position="' + dataPos + '"]');
+    console.log(el);
+
+    flip(el);
+  }
+  return all_candidates;
+};
 const changeDifficulty = () => {
   let difficulty = document.querySelector('[name="difficulty"]');
 
@@ -100,27 +151,17 @@ $form_selector.addEventListener("change", (event) => {
   changeTileForm(form_type.value);
 });
 
-const selectedTiles = [];
+const flip = (el) => {
+  if (el.classList.contains("selected")) el.classList.remove("selected");
+  else el.classList.add("selected");
+};
+
 $flipperGrid.addEventListener("click", (event) => {
   if (event.target.classList.contains("tile2")) {
-    positiontile = event.target.getAttribute("data-position");
-    console.log(positiontile);
+    position = event.target.getAttribute("data-position");
     selectedTiles.push(event.target);
-    if (event.target.classList.contains("selected")) {
-      event.target.classList.remove("selected");
-    } else {
-      event.target.classList.add("selected");
-    }
+    flip(event.target);
+    findNeighbours(position);
   } else console.log("it's not a tile");
+  console.log(selectedTiles);
 });
-
-// x-closey-tile
-
-// data-
-// var sdasdselectedTiles = [
-//   [0,1,0,1,0],
-//   [0,1,0,1,0],
-//   [0,1,0,1,0],
-//   [0,1,0,1,0],
-//   [0,1,0,1,0],
-// ];
