@@ -80,10 +80,32 @@
       <div id="flipper">
           <!-- grid -->
       </div>
-
-      <button>Set name</button>
+      <label>Moves</label>
+      <div id="moves">0</div>
+     
+      <dialog id="name-dialog">
+        <form method="dialog">
+          <p>
+            <label>Player name:
+              <input type="text" id="player-name" placeholder="What is your name?">
+            </label>
+          </p>
+          <div>
+            <button id="confirmBtn" value="default">Confirm</button>
+            <button id="cancelBtn" value="cancel">Cancel</button>
+          </div>
+        </form>
+      </dialog>
+      <p>
+        <button id="set-player-name">Set name</button>
+      </p>
+      <output></output>
+      <div id="fliper-results" hidden >
+        Winner
+      </div>
 
     </div>
+      
     </div>
     <script type="module" src="/main.js"></script>  
     <script type="module" src="flipper.js"></script>

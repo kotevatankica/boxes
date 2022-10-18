@@ -51,17 +51,15 @@ button:focus-visible {
   width: 100px;
   height: 100px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #d5d5d5;
   transition: border-radius 1s, background-color 0.5s ease-in;
-
 }
 .tile2 {
   width: 100px;
   height: 100px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #d5d5d5;
   transition: border-radius 1s, background-color 0.5s ease-in;
-
 }
 .row {
   display: flex;
@@ -108,7 +106,6 @@ button:focus-visible {
   width: 100%;
   flex: 1;
   font-size: 1.5rem;
-
 }
 .controler input {
   padding: 0;
@@ -137,7 +134,6 @@ input:invalid + span {
   padding-left: 5px;
 }
 
-
 #notification {
   position: fixed;
   display: block;
@@ -145,24 +141,24 @@ input:invalid + span {
   width: 100%;
   top: 0px;
   right: 0;
-  transform: translate(0,-100%);
-  transition: all .30s;
+  transform: translate(0, -100%);
+  transition: all 0.3s;
 }
 
-#notification.show{
-  transform: translate(0,0);
+#notification.show {
+  transform: translate(0, 0);
   display: flex;
   flex-direction: column;
 }
-#notification .msg{
+#notification .msg {
   margin-top: 10px;
   text-align: center;
   color: white;
 }
-#notification:has(.success){
+#notification:has(.success) {
   background-color: green;
 }
-#notification:has(.failed){
+#notification:has(.failed) {
   background-color: red;
 }
 
@@ -179,14 +175,14 @@ input:invalid + span {
     margin-bottom: 10px;
   }
 }
- /* new game  */
+/* new game  */
 .new-game {
   margin-block: 50px;
   background-color: #efefef;
   padding-bottom: 50px;
   border-radius: 2em;
 }
-.flipper-game{
+.flipper-game {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -195,4 +191,18 @@ input:invalid + span {
 
 #flipper {
   margin-bottom: 2em;
+}
+#fliper-results {
+  position: fixed;
+  bottom: 0px;
+  background: green;
+  color: #fff;
+  padding: 2em;
+  width: 100vw;
+  text-align: center;
+  transform: translate(0,400%);
+  transition: all 0.4s ease-in-out;
+}
+#fliper-results.shown {
+  transform: translate(0, 0);
 }

@@ -1,8 +1,16 @@
 import "./style.css";
 let $flipperGrid = document.getElementById("flipper");
 let $form_selector = document.querySelector('[name="form"]');
+let dialog = document.getElementById("name-dialog");
+let outputBox = document.querySelector("output");
+let playerNameBtn = document.getElementById("set-player-name");
+let playerName = document.getElementById("player-name");
+let confirmBtn = document.getElementById("confirmBtn");
+let cancelBtn = document.getElementById("cancelBtn");
+let winner = document.getElementById("fliper-results");
 let size;
 var position = "";
+let count = 0;
 const selectedTiles = [];
 
 const changeTileForm = () => {
@@ -26,6 +34,23 @@ const changeTileForm = () => {
     Array.from(document.querySelectorAll(".tile2")).forEach((e) => {
       e.classList.remove("rounded");
     });
+  }
+};
+const flip = (el) => {
+  if (el.classList.contains("selected")) el.classList.remove("selected");
+  else el.classList.add("selected");
+};
+const randomTiles = () => {
+  let randomNum = Math.floor(Math.random() * 10 + 4);
+  for (let i = 0; i < randomNum; i++) {
+    let randomCol = Math.floor(Math.random() * size);
+    let randomRow = Math.floor(Math.random() * size);
+    let el = document.querySelector(
+      '[data-position="' + randomRow + "," + randomCol + '"]'
+    );
+  
+    findNeighbours(`${randomRow},${randomCol}`);
+    flip(el);
   }
 };
 const makeGrid = (size) => {
@@ -61,27 +86,20 @@ const makeGrid = (size) => {
   }
 
   changeTileForm($form_selector.value);
+  count = 0;
+  document.getElementById("moves").innerHTML = count;
+  setTimeout(function () {
+    randomTiles();
+  }, 1);
 };
 makeGrid(size, document.querySelector('[name="form"]').value);
-
-const randomTiles = () => {
-  let randomNum = Math.floor(Math.random() * size + 8);
-  console.log(randomNum);
-
-  for (let i = 0; i < randomNum; i++) {
-    let randomCol = Math.floor(Math.random() * size);
-    let randomRow = Math.floor(Math.random() * size);
-    let el = document.querySelector(
-      '[data-position="' + randomRow + "," + randomCol + '"]'
-    );
-
-    flip(el);
-  }
-};
 
 document
   .querySelector('[name="restart"]')
   .addEventListener("click", (event) => {
+    count = 0;
+    document.getElementById("moves").innerHTML = count;
+    makeGrid(size, document.querySelector('[name="form"]').value);
     randomTiles(event);
   });
 
@@ -93,12 +111,10 @@ const findNeighbours = (position) => {
   var prethodernRed = up_down - 1;
   var sledenRed = up_down + 1;
 
-  console.log(size);
   if (prethodernRed >= 0 && prethodernRed <= size - 1) {
     all_candidates.push([prethodernRed, left_right]);
   }
   if (sledenRed >= 0 && sledenRed <= size - 1) {
-    console.log(prethodernRed);
     all_candidates.push([sledenRed, left_right]);
   }
   var prethodnaCol = left_right - 1;
@@ -110,17 +126,21 @@ const findNeighbours = (position) => {
   if (slednaCol >= 0 && slednaCol <= size - 1) {
     all_candidates.push([up_down, slednaCol]);
   }
-
-  for (let i = 0; i <= all_candidates.length; i++) {
+  // console.log(all_candidates);
+  for (let i = 0; i < all_candidates.length; i++) {
     let arr = all_candidates[i];
-    var dataPos = arr.join(",");
+
+    // console.log(i,arr);
+    var dataPos = all_candidates[i].join(",");
     let el = document.querySelector('[data-position="' + dataPos + '"]');
-    console.log(el);
+    // console.log(el);
+    // console.log(i,all_candidates)
 
     flip(el);
   }
   return all_candidates;
 };
+
 const changeDifficulty = () => {
   let difficulty = document.querySelector('[name="difficulty"]');
 
@@ -151,17 +171,40 @@ $form_selector.addEventListener("change", (event) => {
   changeTileForm(form_type.value);
 });
 
-const flip = (el) => {
-  if (el.classList.contains("selected")) el.classList.remove("selected");
-  else el.classList.add("selected");
-};
-
 $flipperGrid.addEventListener("click", (event) => {
   if (event.target.classList.contains("tile2")) {
     position = event.target.getAttribute("data-position");
     selectedTiles.push(event.target);
+    count = count + 1;
+    // console.log(selectedTiles)
+    document.getElementById("moves").innerHTML = count;
     flip(event.target);
     findNeighbours(position);
   } else console.log("it's not a tile");
-  console.log(selectedTiles);
+});
+
+playerNameBtn.addEventListener("click", () => {
+  if (typeof dialog.showModal === "function") {
+    dialog.showModal();
+  } else {
+    outputBox.value =
+      "Sorry, the <dialog> API is not supported by this browser.";
+  }
+});
+
+playerName.addEventListener("change", (e) => {
+  confirmBtn.value = e.target.value;
+});
+
+cancelBtn.addEventListener("click", (e) => {
+  playerName.value = "";
+  e.target.value = `${dialog.returnValue}`;
+});
+
+dialog.addEventListener("close", (e) => {
+  if (cancelBtn.value == `${dialog.returnValue}`) {
+    outputBox.value = `cancelled. Player name is still ${dialog.returnValue}`;
+  } else {
+    outputBox.value = `${dialog.returnValue} was set as a player`;
+  }
 });

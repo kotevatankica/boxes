@@ -7,6 +7,8 @@ let $form_selector = document.querySelector('[name="tile-form"]');
 let interval;
 let disableClick = false;
 
+
+
 const drawGrid = ($grid, row, tile, tile_form = "") => {
   let local_tile_form = "";
 
