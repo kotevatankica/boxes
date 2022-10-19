@@ -12,6 +12,7 @@ let size;
 var position = "";
 let count = 0;
 const selectedTiles = [];
+let disableClick = false;
 
 const changeTileForm = () => {
   let form_type = document.querySelector('[name="form"]').value;
@@ -48,7 +49,7 @@ const randomTiles = () => {
     let el = document.querySelector(
       '[data-position="' + randomRow + "," + randomCol + '"]'
     );
-  
+
     findNeighbours(`${randomRow},${randomCol}`);
     flip(el);
   }
@@ -97,6 +98,8 @@ makeGrid(size, document.querySelector('[name="form"]').value);
 document
   .querySelector('[name="restart"]')
   .addEventListener("click", (event) => {
+    winner.classList.remove("shown");
+    disableClick = false;
     count = 0;
     document.getElementById("moves").innerHTML = count;
     makeGrid(size, document.querySelector('[name="form"]').value);
@@ -172,6 +175,7 @@ $form_selector.addEventListener("change", (event) => {
 });
 
 $flipperGrid.addEventListener("click", (event) => {
+  if (disableClick) return;
   if (event.target.classList.contains("tile2")) {
     position = event.target.getAttribute("data-position");
     selectedTiles.push(event.target);
@@ -181,6 +185,11 @@ $flipperGrid.addEventListener("click", (event) => {
     flip(event.target);
     findNeighbours(position);
   } else console.log("it's not a tile");
+
+  if ($flipperGrid.querySelectorAll(".tile2.selected").length === 0) {
+    winner.classList.add("shown");
+    disableClick = true;
+  }
 });
 
 playerNameBtn.addEventListener("click", () => {
