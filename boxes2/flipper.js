@@ -144,6 +144,9 @@ const findNeighbours = (position) => {
   return all_candidates;
 };
 
+
+
+
 const changeDifficulty = () => {
   let difficulty = document.querySelector('[name="difficulty"]');
 
