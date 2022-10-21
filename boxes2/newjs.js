@@ -1,14 +1,19 @@
 import Flipper from "./flip.js";
 
-let difficulty = document.querySelector('[name="difficulty"]');
+let $difficulty = document.querySelector('[name="difficulty"]');
+let $tile_form = document.querySelector('[name="form"]');
+let difficulty = $difficulty.value;
+let tile_form = $tile_form.value;
 
 let flipper = new Flipper(document.querySelector("#flipper"), {
-  difficulty: "easy",
-  tile_form: "circle",
+  difficulty: "hard",
+  tile_form: "rounded",
+  // difficulty: difficulty,
+  // tile_form: tile_form,
 });
 
-difficulty.addEventListener("change", (event) => {
-  flipper.changeDifficulty(event.target.value);
+$difficulty.addEventListener("change", (event) => {
+  flipper.changeDifficulty();
   flipper.restartGame();
 });
 

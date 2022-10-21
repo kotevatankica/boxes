@@ -4,7 +4,6 @@ class Flipper {
     this.difficulty = options.difficulty ?? "easy";
     this.tile_form = options.tile_form ?? "circle";
     this.size = options.size ?? 4;
-    this.difficultySelect = document.querySelector('[name="difficulty"]');
     this.tileform = document.querySelector('[name="form"]');
     this.count = 0;
     this.movesSelector = document.getElementById("moves");
@@ -22,8 +21,7 @@ class Flipper {
     this.makeGrid();
     this.restartBtn();
     this.changeTile();
-    // this.changeDifficultyTile();
-    this.changeDifficulty();
+    this.changeDifficulty(this.difficulty);
     this.activateTileClick();
     this.modelButton();
     this.playerNameButton();
@@ -164,15 +162,9 @@ class Flipper {
     return all_candidates;
   };
 
-  changeDifficulty = (event) => {
-    this.difficulty = this.difficultySelect;
-
-
- 
-    // const target = event.target;
-    // const target1 = this.difficulty;
-
-    switch (this.difficulty.value) {
+  changeDifficulty = (difficulty) => {
+    this.difficulty = difficulty;
+    switch (this.difficulty) {
       case "easy":
         this.size = 4;
         break;
@@ -189,13 +181,6 @@ class Flipper {
 
     this.makeGrid();
   };
-
-  // changeDifficultyTile = () => {
-  //   let t = this;
-
-  //   this.difficultySelect.addEventListener("change", t.changeDifficulty);
-
-  // };
 
   restartGame = (event) => {
     this.winner.classList.remove("shown");
