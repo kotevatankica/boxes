@@ -6,14 +6,14 @@ let difficulty = $difficulty.value;
 let tile_form = $tile_form.value;
 
 let flipper = new Flipper(document.querySelector("#flipper"), {
-  difficulty: "hard",
-  tile_form: "rounded",
-  // difficulty: difficulty,
-  // tile_form: tile_form,
+  // difficulty: "hard",
+  // tile_form: "rounded",
+  difficulty: difficulty,
+  tile_form: tile_form,
 });
 
 $difficulty.addEventListener("change", (event) => {
-  flipper.changeDifficulty();
+  flipper.changeDifficulty(event.target.value);
   flipper.restartGame();
 });
 

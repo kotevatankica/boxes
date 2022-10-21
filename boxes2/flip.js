@@ -13,7 +13,7 @@ class Flipper {
     this.position = "";
     this.selectedTiles = [];
     this.playerNameBtn = document.getElementById("set-player-name");
-    this.playerName = document.getElementById("player-name");
+    this.player = document.getElementById("player-name");
     this.confirmBtn = document.getElementById("confirmBtn");
     this.dialog = document.getElementById("name-dialog");
     this.cancelBtn = document.getElementById("cancelBtn");
@@ -215,14 +215,14 @@ class Flipper {
   };
 
   playerNameButton = () => {
-    this.playerName.addEventListener("change", (e) => {
+    this.player.addEventListener("change", (e) => {
       this.confirmBtn.value = e.target.value;
     });
   };
 
   cancelButton = () => {
     this.cancelBtn.addEventListener("click", (e) => {
-      this.playerName.value = "";
+      this.player.value = "";
       e.target.value = `${this.dialog.returnValue}`;
     });
   };
