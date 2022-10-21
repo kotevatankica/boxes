@@ -5,118 +5,131 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-   
   </head>
   <body>
-    <div id="notification">
-    </div>
-   <div class="inner-wrapper">
-    <div class="controlers">
-      <div class="controler">
-        <label>direction:</title>
-      <select name="direction">
-          <option value="fifo">First in First Out</option>
-          <option value="filo">First in Last Out</option>
-      </select>
-      </div>
-      <div class="controler">
-        <label>title form:</title>
-      <select name="tile-form">
-        <option value="circle">Circle</option>
-        <option value="square" selected>Square</option>
-        <option value="rounded" >Slighty rounded</option>
-      </select>
-      </div>
-      <div class="controler">
-        <label>delay:</title>
-        <input name="delay" type="number" value="500" placeholder="Input the delay of disappearance" required>
-      </div>
-      <div class="controler">
-        <label>rows:</title>
-        <input id="rows" name="rows" type="number" value="3" max="20" placeholder="number of rows" required>
-        <span>Drop me something between 1 and 20</span>
-      </div>
-      <div class="controler">
-        <label>columns:</title>
-        <input id="columns" name="columns" type="number" value="3" max="6" placeholder="number of columns" required>
-        <span>Feed me something between 1 and 6</span>
-      </div>
-      <div class="controler">
-        <button name="draw" id="draw">Draw!</button>
-      </div>
-      <div class="controler">
-        <button name="unload" id="unload">Unload</button>
-      </div>
-    
-   </div>
-   <div id="wrapper"></div>
-   </div>
-   <div class="new-game">
-    <div class="controlers">
-      <div class="controler">
-        <button name="restart">Restart </button>
-      </div>
-      <div class="controler">
-        <label for="difficulty">difficulty:</label>
-        <select name="difficulty" id="">
-          <option value="easy"> Easy (4x4)</option>
-          <option value="hard"> Hard (5x5)</option>
-          <option value="nightmare"> Nightmare (6x6)</option>
-        </select>
+    <div id="notification"></div>
+    <div class="inner-wrapper">
+      <div class="controlers">
         <div class="controler">
-          <label for="form">tile form:</label>
-          <select name="form" id="">
-            <option value="circle" selected>Circle</option>
-            <option value="square" >Square</option>
-            <option value="rounded" >Slighty rounded</option>
+          <label>direction:</label>
+          <select name="direction">
+            <option value="fifo">First in First Out</option>
+            <option value="filo">First in Last Out</option>
           </select>
         </div>
+        <div class="controler">
+          <label>title form:</label>
+          <select name="tile-form">
+            <option value="circle">Circle</option>
+            <option value="square" selected>Square</option>
+            <option value="rounded">Slighty rounded</option>
+          </select>
+        </div>
+        <div class="controler">
+          <label>delay:</label>
+          <input
+            name="delay"
+            type="number"
+            value="500"
+            placeholder="Input the delay of disappearance"
+            required
+          />
+        </div>
+        <div class="controler">
+          <label>rows:</label>
+          <input
+            id="rows"
+            name="rows"
+            type="number"
+            value="3"
+            max="20"
+            placeholder="number of rows"
+            required
+          />
+          <span>Drop me something between 1 and 20</span>
+        </div>
+        <div class="controler">
+          <label>columns:</label>
+          <input
+            id="columns"
+            name="columns"
+            type="number"
+            value="3"
+            max="6"
+            placeholder="number of columns"
+            required
+          />
+          <span>Feed me something between 1 and 6</span>
+        </div>
+        <div class="controler">
+          <button name="draw" id="draw">Draw!</button>
+        </div>
+        <div class="controler">
+          <button name="unload" id="unload">Unload</button>
+        </div>
       </div>
+      <div id="wrapper"></div>
     </div>
-    <div class="flipper-game">
-      <h3>Flipper Game</h3>
-      <form>
-        <textarea></textarea>
-      </form>
-      <p id="flipper-text">Turn all tiles to white!</p>
-  
-
-
-      <div id="flipper">
-          <!-- grid -->
-      </div>
-      <label>Moves</label>
-      <div id="moves">0</div>
-     
-      <dialog id="name-dialog">
-        <form method="dialog">
-          <p>
-            <label>Player name:
-              <input type="text" id="player-name" placeholder="What is your name?">
-            </label>
-          </p>
-          <div>
-            <button id="confirmBtn" value="default">Confirm</button>
-            <button id="cancelBtn" value="cancel">Cancel</button>
+    <div class="new-game">
+      <div class="controlers">
+        <div class="controler">
+          <button name="restart">Restart</button>
+        </div>
+        <div class="controler">
+          <label for="difficulty">difficulty:</label>
+          <select name="difficulty" id="">
+            <option value="easy">Easy (4x4)</option>
+            <option value="hard">Hard (5x5)</option>
+            <option value="nightmare">Nightmare (6x6)</option>
+          </select>
+          <div class="controler">
+            <label for="form">tile form:</label>
+            <select name="form" id="">
+              <option value="circle" selected>Circle</option>
+              <option value="square">Square</option>
+              <option value="rounded">Slighty rounded</option>
+            </select>
           </div>
-        </form>
-      </dialog>
-      <p>
-        <button id="set-player-name">Set name</button>
-      </p>
-      <output></output>
-      <div id="fliper-results" >
-        Winner
+        </div>
       </div>
+      <div class="flipper-game">
+        <h3>Flipper Game</h3>
+        <p id="flipper-text">Turn all tiles to white!</p>
 
+        <div id="flipper">
+          <!-- grid -->
+        </div>
+        <label>Moves</label>
+        <div id="moves">0</div>
+
+        <dialog id="name-dialog">
+          <form method="dialog">
+            <p>
+              <label
+                >Player name:
+                <input
+                  type="text"
+                  id="player-name"
+                  placeholder="What is your name?"
+                />
+              </label>
+            </p>
+            <div>
+              <button id="confirmBtn" value="default">Confirm</button>
+              <button id="cancelBtn" value="cancel">Cancel</button>
+            </div>
+          </form>
+        </dialog>
+        <p>
+          <button id="set-player-name">Set name</button>
+        </p>
+        <output></output>
+        <div id="fliper-results">Winner</div>
+      </div>
     </div>
-      
-    </div>
-    <script type="module" src="/main.js"></script>  
+    <script type="module" src="/main.js"></script>
     <!-- <script type="module" src="flipper.js"></script> -->
     <script type="module" src="flip.js"></script>
     <script type="module" src="newjs.js"></script>
-    
-
   </body>
 </html>

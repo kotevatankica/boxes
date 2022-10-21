@@ -166,10 +166,11 @@ class Flipper {
 
   changeDifficulty = (event) => {
     this.difficulty = this.difficultySelect;
+
+
+ 
     // const target = event.target;
     // const target1 = this.difficulty;
-
-    // console.log(target, target1);
 
     switch (this.difficulty.value) {
       case "easy":
@@ -193,8 +194,9 @@ class Flipper {
   //   let t = this;
 
   //   this.difficultySelect.addEventListener("change", t.changeDifficulty);
+
   // };
-  
+
   restartGame = (event) => {
     this.winner.classList.remove("shown");
     this.disableClick = false;
