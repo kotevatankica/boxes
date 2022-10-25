@@ -4,6 +4,7 @@ let $difficulty = document.querySelector('[name="difficulty"]');
 let $tile_form = document.querySelector('[name="form"]');
 let difficulty = $difficulty.value;
 let tile_form = $tile_form.value;
+let notify = document.getElementById("notification");
 
 let flipper = new Flipper(document.querySelector("#flipper"), {
   // difficulty: "hard",
@@ -17,28 +18,27 @@ $difficulty.addEventListener("change", (event) => {
   flipper.restartGame();
 });
 
-let restart = document.querySelector('[name="restart"]');
-
-restart.onclick = function () {
-  restart.dispatchEvent(
-    new CustomEvent("custom-event-alert", {
-      bubbles: true,
-      detail: { text: "Game will be restarted :)" },
-    })
-  );
+const showNotify = (text, type = "success", delay = 2000) => {
+  notify.innerHTML = `<div class= "msg ${type}">${text}</div>`;
+  notify.classList.add("show");
+  setTimeout(() => {
+    hideNotify("");
+  }, delay);
+};
+const hideNotify = (text) => {
+  console.log(notify);
+  notify.innerHTML = `<div class= "msg">${text}</div>`;
+  notify.classList.remove("show");
 };
 
-document.addEventListener("custom-event-alert", (e) => {
-  alert(e.detail.text);
+document.addEventListener("custom-restart-alert", (e) => {
+  showNotify(e.detail.text, "success", 2000);
 });
 
-let select = document.querySelector('[name="form"]');
-
-select.addEventListener("change", (e) => {
-  alert(`Tile form will be changed to ` + select.value);
+document.addEventListener("custom-tile-alert", (e) => {
+  showNotify(e.detail.text, "success", 2000);
 });
 
-function triggerChange(element) {
-  let changeEvent = new Event("change");
-  element.dispatchEvent(changeEvent);
-}
+document.addEventListener("custom-grid-alert", (e) => {
+  showNotify(e.detail.text, "success", 2000);
+});

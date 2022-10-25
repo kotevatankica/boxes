@@ -102,6 +102,19 @@ class Flipper {
       }
       this.flipperGrid.append(one_row_string);
     }
+    this.flipperGrid.dispatchEvent(
+      new CustomEvent("custom-grid-alert", {
+        bubbles: true,
+        detail: {
+          text:
+            this.size +
+            `x` +
+            this.size +
+            ` grid is created with tile form ` +
+            this.tile_form,
+        },
+      })
+    );
 
     this.changeTileForm();
     this.count = 0;
@@ -193,6 +206,12 @@ class Flipper {
   restartBtn = () => {
     this.restart.addEventListener("click", (event) => {
       this.restartGame(event);
+      this.restart.dispatchEvent(
+        new CustomEvent("custom-restart-alert", {
+          bubbles: true,
+          detail: { text: "Game is restarted :)" },
+        })
+      );
     });
   };
 
@@ -200,6 +219,12 @@ class Flipper {
     this.tileform.addEventListener("change", (event) => {
       this.tile_form = event.target.value;
       this.changeTileForm(this.tile_form);
+      this.tileform.dispatchEvent(
+        new CustomEvent("custom-tile-alert", {
+          bubbles: true,
+          detail: { text: `Tile form is changed to ` + this.tile_form },
+        })
+      );
     });
   };
 
